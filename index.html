@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Library</title>
+
+    <!--Javascript file-->
+    <script src="./javascript.js" defer></script>
+
+    <!--Css file-->
+    <link rel="stylesheet" href="./styles.css">
+
+    <!--Font Awesome Kit-->
+    <script src="https://kit.fontawesome.com/fff4f16dc7.js" crossorigin="anonymous"></script>
+
+    <!--Google Fonts Library-->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Lobster&family=Mukta:wght@200&display=swap" rel="stylesheet">
+
+</head>
+<body>
+
+    <div class="library-items">
+        <h1>Library</h1>
+        <div class="book-info">
+            <form action="" method="get">
+                <div class="close"><i class="fa-solid fa-xmark"></i></div>
+                <ul>
+                    <li>
+                        <label for="title">Title</label>
+                        <input type="text" id="title" name="title" pattern="">
+                    </li>
+                    <li>
+                        <label for="author">Author</label>
+                        <input type="text" id="author" name="author" pattern="">
+                    </li>
+                    <li>
+                        <label for="pages">Pages</label>
+                        <input type="number" id="pages" name="pages">
+                    </li>
+                    <li>
+                        <fieldset>
+                            <legend>Read</legend>
+                            <div>
+                                <input type="radio" id="yes" value="yes" name="read">
+                                <label for="yes">Yes</label>
+                            </div>
+                            <div>
+                                <input type="radio" id="no" value="no" name="read" checked>
+                                <label for="no">No</label>
+                            </div>
+                        </fieldset>
+                    </li>
+                    <input class="submit" type="submit" value="Add">
+                    <input type="reset" value="Reset">
+                </ul>
+            </form>
+        </div>
+        <div class="books">
+            <div class="book add">
+                <div class="icon">
+                    <i class="fa-solid fa-plus fa-2xl"></i>
+                </div>
+                <div class="add-new-book">
+                    <p>ADD NEW BOOK</p>
+                </div>
+            </div>
+        </div>
+        <a class="credits" href="https://www.pexels.com/photo/macro-shot-of-wooden-planks-326333/">Photo by Pixabay</a>
+    </div>
+
+</body>
+</html>
