@@ -4,7 +4,6 @@ const add = document.querySelector(".add");
 const bookInfo = document.querySelector(".book-info");
 const bookDisplay = document.querySelector(".books");
 const closeInfo = document.querySelector(".close");
-let deleteArray = [];
 
 closeInfo.addEventListener('click',()=>{
     bookDisplay.style.display = "grid";
@@ -19,6 +18,7 @@ add.addEventListener('click',()=>{
 submit.addEventListener('click',(event)=>{
     event.preventDefault();
     addBookToLibrary();
+    deleteB();
 });
 
 //Array to store the objects
@@ -38,6 +38,7 @@ if(myLibrary.length>0){
     for(let i=0; i<=myLibrary.length-1;i++){
         let newBook = myLibrary[i];
         createCard(newBook);
+        deleteB();
     }
 }
 
@@ -77,7 +78,7 @@ function Book(title, author, pages, read){
     };
 };
 
-/*function createCard(newBook){
+function createCard(newBook){
     const book = document.createElement("div");
     const classArray = newBook.title.split(" ");
     for(let i=0; i<=classArray.length-1; i++){
@@ -94,10 +95,8 @@ function Book(title, author, pages, read){
     }
 
     const classes = classArray.join("");
-
-    //books.innerHTML+=`<div class="book"><div class="delete"><i class="fa-solid fa-mark"></i></div><div><div class="bookTitle">Title: ${newBook.title}</div><div class="bookAuthor"></div><div class></div></div><div></div></div>`;
     
-    book.classList.add(classes);
+    book.setAttribute('id',classes);
     book.classList.add("book");
 
     books.appendChild(book);
@@ -144,9 +143,7 @@ function Book(title, author, pages, read){
     info.appendChild(bookPages);
     read.appendChild(bookRead);
 
-    let deleteCard = deleteBook.querySelectorAll(".fa-solid.fa-xmark");
-    deleteArray.push(deleteCard);
-}*/
+}
 
 function clearForm(){
     document.querySelector("#title").value = "";
@@ -155,72 +152,42 @@ function clearForm(){
     document.querySelector('input[name="read"]:checked').value = "no";
 }
 
-function createCard(newBook){
-    const book = document.createElement("div");
-    const classArray = newBook.title.split(" ");
-    for(let i=0; i<=classArray.length-1; i++){
+function deleteB(){
 
-        let word;
+    const childs = document.querySelectorAll(".delete");
 
-        if(i===0){
-            word = classArray[i].charAt(0).toLowerCase()+classArray[i].slice(1);
-        }else{
-            word = classArray[i].charAt(0).toUpperCase()+classArray[i].slice(1);
-        }
+    childs.forEach(child =>{
+        child.addEventListener('click',function(){
 
-        classArray[i]= word;
-    }
+            let deleteId = this.parentElement.id;
 
-    const classes = classArray.join("");
-    
-    book.classList.add(classes);
-    book.classList.add("book");
+            for(let i=0; i<=myLibrary.length-1;i++){
 
-    books.appendChild(book);
+                const book = myLibrary[i].title.split(" ");
+                
+                for(let i=0; i<=book.length-1; i++){
 
-    const deleteBook = document.createElement("div");
-    const info = document.createElement("div");
-    const read = document.createElement("div");
+                    let word;
 
-    deleteBook.classList.add("delete");
-    info.classList.add("info");
-    read.classList.add("read");
+                    if(i===0){
+                        word = book[i].charAt(0).toLowerCase()+book[i].slice(1);
+                    }else{
+                        word = book[i].charAt(0).toUpperCase()+book[i].slice(1);
+                    }
 
-    book.appendChild(deleteBook);
-    book.appendChild(info);
-    book.appendChild(read);
+                    book[i]= word;
+                }
 
-    const cross = document.createElement("i");
-    const bookTitle = document.createElement("div");
-    const bookAuthor = document.createElement("div");
-    const bookPages = document.createElement("div");
-    const bookRead = document.createElement("div");
-  
-    cross.classList.add("fa-solid");
-    cross.classList.add("fa-xmark");
-    bookTitle.classList.add("bookTitle");
-    bookAuthor.classList.add("bookAuthor");
-    bookPages.classList.add("bookPages");
-    bookRead.classList.add("bookRead");
+                const title = book.join("");
+                if(deleteId===title){
 
-    bookTitle.textContent = `Title: ${newBook.title}`;
-    bookAuthor.textContent = `Author: ${newBook.author}`;
-    bookPages.textContent = `Pages: ${newBook.pages}`;
-    if(newBook.read==="yes"){
-        bookRead.textContent = `read`;
-    }else if(newBook.read==="no"){
-        bookRead.textContent = `not read yet`;
-    }
+                    myLibrary.splice(i,1);
 
-    deleteBook.appendChild(cross);
-    info.appendChild(bookTitle);
-    info.appendChild(bookAuthor);
-    info.appendChild(bookPages);
-    read.appendChild(bookRead);
+                    const removeBook = document.querySelector(`#${deleteId}`);
 
-    let deleteCard = deleteBook.querySelectorAll(".fa-solid.fa-xmark");
-    deleteArray.push(deleteCard);
+                    removeBook.remove();
+                }
+            }
+        });
+    });
 }
-
-
-
